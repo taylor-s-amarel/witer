@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>GIFs</title>
+  </head>
+  <body>
+    <div id="gif-container">
+      {% for gif in gifs %}
+        <img src="{{ gif }}" alt="GIF">
+      {% endfor %}
+    </div>
+  </body>
+  <script>
+    // Get the gif-container element
+    const gifContainer = document.getElementById('gif-container');
+
+    // Set the initial index to 0
+    let currentIndex = 0;
+
+    // Set the interval to switch to the next GIF
+    const interval = 5000; // 5 seconds
+
+    // Set the function to switch to the next GIF
+    function nextGif() {
+      // Get all of the images in the gif-container element
+      const images = gifContainer.getElementsByTagName('img');
+
+      // Hide all of the images
+      for (let i = 0; i < images.length; i++) {
+        images[i].style.display = 'none';
+      }
+
+      // Increment the current index, or reset it to 0 if it's the last image
+      currentIndex = (currentIndex + 1) % images.length;
+
+      // Show the next image
+      images[currentIndex].style.display = 'block';
+    }
+
+    // Run the nextGif function every interval
+    setInterval(nextGif, interval);
+  </script>
+</html>

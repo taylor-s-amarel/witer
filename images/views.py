@@ -12,11 +12,13 @@ logger = logging.getLogger(__name__)
 
 import os
 from django.shortcuts import render
+from django.conf import settings
 
 
 def gif_view(request):
     # Change this to the directory where your GIFs are stored
-    gif_dir = '/path/to/gifs'
+    gif_dir = settings.MEDIA_ROOT
+    print(gif_dir)
 
     # Use the os module to get a list of all files in the gif_dir
     gif_files = os.listdir(gif_dir)
@@ -28,7 +30,7 @@ def gif_view(request):
     gif_urls = [settings.MEDIA_URL + gif for gif in gifs]
 
     # Pass the list of GIF URLs to the template as a context variable
-    return render(request, 'gifs.html', {'gifs': gif_urls})
+    return render(request, 'main.html', {'gifs': gif_urls})
 
 def index_view(request):
     images = Image.objects.all()
